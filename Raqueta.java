@@ -1,9 +1,9 @@
 import javafx.scene.paint.*;
-
+import javafx.scene.shape.Rectangle;
 /**
  * @author franciscoJavier
  */
-public class Raqueta extends Ladrillo{
+public class Raqueta extends Rectangle{
     private double x;
     private double y;
     private double width;
@@ -13,7 +13,7 @@ public class Raqueta extends Ladrillo{
     private int velocidad;
     
     public Raqueta(double x, double y, double width, double height, int limiteEnX) {
-        super(x, y, width, height);
+        super();
         this.setWidth(width);
         this.setHeight(height);
         this.setTranslateX(x);
@@ -25,8 +25,13 @@ public class Raqueta extends Ladrillo{
         velocidad = 1;
     }
 
-    public Raqueta(){
+    public Raqueta(int limiteEnX){
         super();
+        this.setWidth(50);
+        this.setHeight(5);
+        this.setTranslateX(225);
+        this.setTranslateY(480);
+        this.setFill(Color.BLUE);
         direccion = 1;
         this.limiteEnX = limiteEnX;
         velocidad = 1;

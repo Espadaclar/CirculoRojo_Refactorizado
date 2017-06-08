@@ -1,5 +1,6 @@
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import java.util.Random;
 /**
  * @author franciscoJavier
  */
@@ -12,8 +13,15 @@ public class Ladrillo extends Rectangle{
     private Color color;
 
     public Ladrillo(double x, double y, double width, double height) {
-        ladrillo = new Rectangle(x, y, width, height);
-        color = null;
+        super(x, y, width, height);
+        Random ale = new Random();
+        Color colorLadrillo = new Color(ale.nextFloat(), ale.nextFloat(), ale.nextFloat(), ale.nextFloat());
+        this.setWidth(width);
+        this.setHeight(height);
+        this.setTranslateX(x);
+        this.setTranslateY(y);
+        this.setFill(colorLadrillo);
+        this.setStroke(Color.BLACK);
         
     }
     

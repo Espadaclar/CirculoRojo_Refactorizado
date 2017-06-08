@@ -22,10 +22,6 @@ import javafx.scene.input.KeyCode;
  */
 public class Aplicacion extends Application
 {
-    // instance variables - replace the example below with your own
-    private Pelota pelota;
-    private Ladrillo ladrillo;
-    private Raqueta raqueta;
 
     public static void main(String[] args) {
 
@@ -35,15 +31,9 @@ public class Aplicacion extends Application
     @Override
     public void start(Stage ventana){
         Random ale = new Random();
-        Color colorLadrillo = new Color(ale.nextFloat(), ale.nextFloat(), ale.nextFloat(), ale.nextFloat());
-        Color colorPelota = new Color(ale.nextFloat(), ale.nextFloat(), ale.nextFloat(), ale.nextFloat());
 
-        Pelota pelota;
-        Ladrillo ladrillo;
-        Raqueta raqueta;
-
-        int  ANCHO_ESCENA = 500;
-        int ALTO_ESCENA = 500;
+        int  ANCHO_ESCENA = 800;
+        int ALTO_ESCENA = 700;
         int RADIO = 10;
 
         int LARGO_LADRILLO = 100;
@@ -58,29 +48,17 @@ public class Aplicacion extends Application
         Scene escene = new Scene(root, ANCHO_ESCENA, ALTO_ESCENA, Color.WHITESMOKE);
         ventana.setScene(escene);
 
-        pelota = new Pelota();
-        pelota.setCenterX(ANCHO_ESCENA/2);
-        pelota.setCenterY( ALTO_ESCENA/2);
-        pelota.setRadius(RADIO);
-        pelota.setFill(colorPelota);
-        pelota.setStroke(Color.RED);
+        Pelota pelota = new Pelota(ANCHO_ESCENA/2, ALTO_ESCENA/2, RADIO);
         root.getChildren().add(pelota);
 
-        ladrillo = new Ladrillo();
-        ladrillo.setLayoutX(ale.nextInt(ANCHO_ESCENA - (LARGO_LADRILLO *2)) + LARGO_LADRILLO);
-        ladrillo.setLayoutY(ale.nextInt(ALTO_ESCENA/2)  + ALTO_LADRILLO_ALEATORIO);
-        ladrillo.setWidth(LARGO_LADRILLO_ALEATORIO);
-        ladrillo.setHeight(ALTO_LADRILLO_ALEATORIO);
-        ladrillo.setFill(colorLadrillo);
-        ladrillo.setStroke(Color.BLACK);
+        //
+        Ladrillo ladrillo = new Ladrillo( (ale.nextInt(ANCHO_ESCENA - (LARGO_LADRILLO *2)) + LARGO_LADRILLO),
+            (ale.nextInt(ALTO_ESCENA/2)  + ALTO_LADRILLO_ALEATORIO),
+            (LARGO_LADRILLO_ALEATORIO), (ALTO_LADRILLO_ALEATORIO));
         root.getChildren().add(ladrillo);
 
-        raqueta = new Raqueta( (ANCHO_ESCENA /2), (ALTO_ESCENA - (ALTO_RAQUETA + 20)), LARGO_RAQUETA, ALTO_RAQUETA, ANCHO_ESCENA);
-        //         raqueta.setLayoutX(ANCHO_ESCENA /2);
-        //         raqueta.setLayoutY(ALTO_ESCENA - (ALTO_RAQUETA + 20));
-        //         raqueta.setWidth(LARGO_RAQUETA);
-        //         raqueta.setHeight(ALTO_RAQUETA);
-        raqueta.setFill(Color.BLUE);
+        //
+        Raqueta raqueta = new Raqueta( (ANCHO_ESCENA /2), (ALTO_ESCENA - (ALTO_RAQUETA + 20)), LARGO_RAQUETA, ALTO_RAQUETA, ANCHO_ESCENA);
         root.getChildren().add(raqueta);
 
         //////////////////////////////////////////////////////////////
@@ -89,16 +67,14 @@ public class Aplicacion extends Application
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse (true); 
 
-        Rectangle rectangle = new Rectangle (0, 0, 100, 50);
-        root.getChildren().add(rectangle); 
-
         KeyFrame keyframe = new KeyFrame(Duration.seconds(0.001), event -> {
                     raqueta.mover();
                 });
 
         timeline.getKeyFrames().add(keyframe);
         timeline.play();
-
+        
+        //MUEVE RAQUETA CON LAS TECLAS.
         escene.setOnKeyPressed(event -> {
                 if (event.getCode() == KeyCode.RIGHT && 
                 raqueta.getBoundsInParent().getMaxX() != escene.getWidth()) {
@@ -111,7 +87,10 @@ public class Aplicacion extends Application
             });
 
         ventana.show();
-
+        
+        
+        //         Rectangle rectangle = new Rectangle (0, 0, 100, 50);
+        //        root.getChildren().add(rectangle); 
         //         KeyValue xValue = new KeyValue (rectangle.xProperty (), 200);
         //         KeyValue yValue = new KeyValue (rectangle.yProperty (), 200);
         //         KeyFrame   keyFrame = new KeyFrame (Duration.millis (2000), xValue, yValue);
