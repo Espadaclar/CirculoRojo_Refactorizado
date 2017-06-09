@@ -15,6 +15,9 @@ public class Ladrillo extends Rectangle{
     public Ladrillo(double x, double y, double width, double height) {
         super();
         Random ale = new Random();
+        width = ale.nextInt(60) +40;
+        height = ale.nextInt(11) +9;
+
         Color colorLadrillo = new Color(ale.nextFloat(), ale.nextFloat(), ale.nextFloat(), ale.nextFloat());
         this.setTranslateX(x);
         this.setTranslateY(y);
