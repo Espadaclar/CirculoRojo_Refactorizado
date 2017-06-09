@@ -10,6 +10,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyValue;
@@ -71,6 +72,16 @@ public class Aplicacion extends Application
                     double maximoXRaqueta = raqueta.getBoundsInParent().getMaxX();
                     double minimoYRaqueta = raqueta.getBoundsInParent().getMinY();
                     pelota.mover(ANCHO_ESCENA, ALTO_ESCENA, minimoXRaqueta, maximoXRaqueta, minimoYRaqueta);
+                    if(pelota.getVelocidadPelota() == 0){
+                        Label label1 = new Label();
+                            label1.setText(" -- GANE  OVER -- ");        
+                            label1.setLayoutX( (ANCHO_ESCENA /2) -90);
+                            label1.setLayoutY(ALTO_ESCENA /2);
+                            label1.setTextFill(Color.RED);
+                            label1.setStyle("-fx-font-size: 2em;");
+                            root.getChildren().add(label1);
+                    }
+                    
                     raqueta.mover();
                     
                 });

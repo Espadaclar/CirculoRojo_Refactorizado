@@ -63,5 +63,13 @@ public class Pelota extends Circle{
             velocidadEnX = 0;
         }
     }
+    
+    public int getVelocidadPelota(){
+        int valor = 1;
+        if(velocidadEnY == 0 && velocidadEnX == 0){
+            valor = 0;
+        }
+        return valor;
+    }
 }
 
