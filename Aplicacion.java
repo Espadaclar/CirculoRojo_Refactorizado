@@ -32,7 +32,7 @@ public class Aplicacion extends Application
     public void start(Stage ventana){
         Random ale = new Random();
 
-        int  ANCHO_ESCENA = 800;
+        int ANCHO_ESCENA = 800;
         int ALTO_ESCENA = 700;
         int RADIO = 10;
 
@@ -47,16 +47,14 @@ public class Aplicacion extends Application
         Group root = new Group();
         Scene escene = new Scene(root, ANCHO_ESCENA, ALTO_ESCENA, Color.WHITESMOKE);
         ventana.setScene(escene);
-
+        //
         Pelota pelota = new Pelota(ANCHO_ESCENA/2, ALTO_ESCENA/2, RADIO);
         root.getChildren().add(pelota);
-
-        //
-        Ladrillo ladrillo = new Ladrillo( (ale.nextInt(ANCHO_ESCENA - (LARGO_LADRILLO *2)) + LARGO_LADRILLO),
-            (ale.nextInt(ALTO_ESCENA/2)  + ALTO_LADRILLO_ALEATORIO),
+        // 
+        Ladrillo ladrillo = new Ladrillo( (ale.nextInt( ( ANCHO_ESCENA -(LARGO_LADRILLO_ALEATORIO *2) ) + LARGO_LADRILLO_ALEATORIO) ),
+                            ale.nextInt(ALTO_ESCENA /2) + ALTO_LADRILLO_ALEATORIO,
             (LARGO_LADRILLO_ALEATORIO), (ALTO_LADRILLO_ALEATORIO));
         root.getChildren().add(ladrillo);
-
         //
         Raqueta raqueta = new Raqueta( (ANCHO_ESCENA /2), (ALTO_ESCENA - (ALTO_RAQUETA + 20)), LARGO_RAQUETA, ALTO_RAQUETA, ANCHO_ESCENA);
         root.getChildren().add(raqueta);
@@ -67,8 +65,14 @@ public class Aplicacion extends Application
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse (true); 
 
-        KeyFrame keyframe = new KeyFrame(Duration.seconds(0.001), event -> {
+        KeyFrame keyframe = new KeyFrame(Duration.seconds(0.01), event -> {
+                    
+                    double minimoXRaqueta = raqueta.getBoundsInParent().getMinX();
+                    double maximoXRaqueta = raqueta.getBoundsInParent().getMaxX();
+                    double minimoYRaqueta = raqueta.getBoundsInParent().getMinY();
+                    pelota.mover(ANCHO_ESCENA, ALTO_ESCENA, minimoXRaqueta, maximoXRaqueta, minimoYRaqueta);
                     raqueta.mover();
+                    
                 });
 
         timeline.getKeyFrames().add(keyframe);

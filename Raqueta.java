@@ -45,7 +45,7 @@ public class Raqueta extends Rectangle{
     
     public void cambiarDireccionIzquierda(){
         if(getBoundsInParent().getMinX() != 0 ){
-            velocidad = -1;
+            velocidad =  -1;
         }
     }
     
