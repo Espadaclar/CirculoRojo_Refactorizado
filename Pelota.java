@@ -52,7 +52,6 @@ public class Pelota extends Circle{
         else if(getBoundsInParent().getMinY() <=  0)        {
             velocidadEnY = -velocidadEnY;
         }
-        //      SI LA BOLA SE SALE POR ABAJO APARECE UN MENSAJE DE GANE OVER.
         else if(getBoundsInParent().getMaxY() >= minimoYRaqueta && 
                         (getBoundsInParent().getMaxX() - radius) <= maximoXRaqueta &&
                           getBoundsInParent().getMinX() >= minimoXRaqueta ){
@@ -64,12 +63,25 @@ public class Pelota extends Circle{
         }
     }
     
+    /**
+     * la pelota se queda en velocidad 0 cuando ha sobrepasado la raqueta. Este valor es utilizado para mostrar 'GANE OVER'
+     */
     public int getVelocidadPelota(){
         int valor = 1;
         if(velocidadEnY == 0 && velocidadEnX == 0){
             valor = 0;
         }
         return valor;
+    }
+    
+    /**
+     * imprescindible para variar la velocidad de la bola cuando sea necesario en la clase Rectangulo
+     */
+    public void setVelocidad_X_APelota(int velocidad){
+        velocidadEnX = velocidad;
+    }
+    public void setVelocidad_Y_APelota(int velocidad){
+        velocidadEnY = velocidad;
     }
 }
 

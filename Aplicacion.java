@@ -38,7 +38,7 @@ public class Aplicacion extends Application
 
         int ANCHO_ESCENA = 800;
         int ALTO_ESCENA = 700;
-        int NUM_LADRILLO_EN_ESCENA = 60;
+        int NUM_LADRILLO_EN_ESCENA = 30;
         int RADIO = 10;
 
         int LARGO_LADRILLO = 100;
@@ -75,14 +75,14 @@ public class Aplicacion extends Application
                 }
                 if(barritaValida == true){
                     ladrillos.add(ladrillo);
-                    root.getChildren().add(ladrillo);; 
+                    root.getChildren().add(ladrillo);
                     add = true;
                 }
             }
             val ++;
         }
         //SE CREA LA RAQUETA
-        Raqueta raqueta = new Raqueta( (ANCHO_ESCENA /2), (ALTO_ESCENA - (ALTO_RAQUETA + 20)), LARGO_RAQUETA, ALTO_RAQUETA, ANCHO_ESCENA);
+        Raqueta raqueta = new Raqueta( ( (ANCHO_ESCENA /2) - 30), (ALTO_ESCENA - (ALTO_RAQUETA + 20)), LARGO_RAQUETA, ALTO_RAQUETA, ANCHO_ESCENA);
         root.getChildren().add(raqueta);
         // SE CREA LA PELOTA
         Pelota pelota = new Pelota(ANCHO_ESCENA/2, ALTO_ESCENA/2, RADIO);
@@ -94,7 +94,7 @@ public class Aplicacion extends Application
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse (true); 
 
-        KeyFrame keyframe = new KeyFrame(Duration.seconds(0.01), event -> {
+        KeyFrame keyframe = new KeyFrame(Duration.seconds(0.007), event -> {
 
                     // PELOTA-
                     double minimoXRaqueta = raqueta.getBoundsInParent().getMinX();
@@ -113,6 +113,9 @@ public class Aplicacion extends Application
 
                     // RAQUETA-
                     raqueta.mover();
+                    
+                    //LADRILLOS-
+                    ladrillo2.eliminarLadrillos(ladrillos, pelota);
 
                 });
 
